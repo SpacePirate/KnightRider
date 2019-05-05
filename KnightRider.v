@@ -22,7 +22,6 @@ clock_divider u0 (
 .slow_clock(slow_clock)
 );
 
-
 always @ (posedge slow_clock)
 begin
     if (LED_index >= 4'd9)
