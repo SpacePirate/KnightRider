@@ -7,11 +7,6 @@ input wire CLOCK_50,
 output wire [9:0] LEDR
 );
 
-reg stage1;
-reg stage2;
-reg stage3;
-reg stage4;
-
 wire slow_clock;
 reg [3:0] LED_index;
 reg count_up;
@@ -24,12 +19,12 @@ clock_divider u0 (
 
 always @ (posedge slow_clock)
 begin
-    if (LED_index >= 4'd9)
+    if (LED_index >= 4'd8)
         count_up <= 1'b0;
-    else if (count == 4'd0)
+    else if (LED_index == 4'd1)
         count_up <= 1'b1;
     else
-        LED_index <= LED_index;
+        count_up <= count_up;
 end
 
 // Control counter
@@ -38,7 +33,7 @@ begin
     if (count_up)
         LED_index <= LED_index + 1'b1;
     else
-        LED_index <= LED_index + 1'b1;
+        LED_index <= LED_index - 1'b1;
 end
 
 assign LEDR[9:0] = 1'b1 << LED_index;
