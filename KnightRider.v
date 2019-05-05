@@ -17,6 +17,7 @@ clock_divider u0 (
 .slow_clock(slow_clock)
 );
 
+// Increment counter
 always @ (posedge slow_clock)
 begin
     if (LED_index >= 4'd8)
@@ -27,7 +28,7 @@ begin
         count_up <= count_up;
 end
 
-// Control counter
+// Control counter direction
 always @ (posedge slow_clock)
 begin
     if (count_up)
